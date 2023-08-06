@@ -36,18 +36,18 @@ public class MultiTenantHandlerInterceptor extends HandlerInterceptorAdapter {
         // Header that would be attached to every request made to identify tenant DB.
         String tenantId = request.getHeader("x-tenant-id");
         //OR can look into request parameter that can help identify tenant DB
-        if(request.getParameterMap() != null){
-            String[] clientCodes = request.getParameterMap().get("planetName");
-            if(clientCodes != null && clientCodes.length > 0){
-                tenantId = clientCodes[0];
-            }
-        }
+//        if(request.getParameterMap() != null){
+//            String[] clientCodes = request.getParameterMap().get("planetName");
+//            if(clientCodes != null && clientCodes.length > 0){
+//                tenantId = clientCodes[0];
+//            }
+//        }
         // or can look into PATH Variables/attribute.
-        Object o = request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
-        if (o instanceof Map) {
-            var map = new TreeMap<>((Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE));
-            tenantId =  map.get("planetName");
-        }
+//        Object o = request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+//        if (o instanceof Map) {
+//            Map map = new TreeMap<>((Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE));
+//            tenantId = (String) map.get("planetName");
+//        }
         tenantHolder.setTenantId(tenantId);
     }
 }
