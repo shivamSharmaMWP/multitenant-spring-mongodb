@@ -1,8 +1,8 @@
 package com.multitenant;
 
+import com.multitenant.entity.Employee;
 import com.multitenant.entity.Planet;
 import com.multitenant.entity.PlanetRepository;
-import com.sample.multitenant.mongo.domain.Employee;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +25,11 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     private PlanetRepository planetRepository;
+
+    @GetMapping(path = "/employee")
+    public ResponseEntity<List<Employee>> getEmployees() {
+        return new ResponseEntity(employeeService.findAllByTenantId(), HttpStatus.OK);
+    }
 
     @GetMapping(path = "/employee/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") final String id) {

@@ -9,8 +9,8 @@ import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 
 public class MultiTenantMongoDBFactory extends SimpleMongoClientDatabaseFactory {
 
-    @Autowired
-    private TenantHolder tenantHolder;
+//    @Autowired
+//    private TenantHolder tenantHolder;
     private final String globalDB;
 
     public MultiTenantMongoDBFactory(MongoClient mongoClient, String globalDB) {
@@ -24,7 +24,7 @@ public class MultiTenantMongoDBFactory extends SimpleMongoClientDatabaseFactory 
     }
 
     protected String getTenantDatabase() {
-        String tenantId = tenantHolder.getTenantId();
+        String tenantId = TenantHolder.getTenantId();
         if (tenantId != null) {
             return tenantId;
         } else {

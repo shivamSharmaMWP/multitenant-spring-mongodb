@@ -1,8 +1,9 @@
-package com.sample.multitenant.mongo.domain;
+package com.multitenant.entity;
 
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * User: rajeshgupta
@@ -10,6 +11,7 @@ import org.springframework.data.annotation.Id;
  */
 @Data
 @Builder
+@Document
 public class Employee {
 /*
 {"firstName": "shivam", "lastName": "sharma", "age": 29, "salary": 30303}
@@ -20,4 +22,6 @@ public class Employee {
     private String lastName;
     private int age;
     private long salary;
+
+    private String tenantId;
 }

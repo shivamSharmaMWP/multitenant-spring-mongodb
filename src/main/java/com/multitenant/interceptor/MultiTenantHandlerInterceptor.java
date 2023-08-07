@@ -16,23 +16,23 @@ import java.util.TreeMap;
 
 @Component
 public class MultiTenantHandlerInterceptor extends HandlerInterceptorAdapter {
-    @Autowired
-    private TenantHolder tenantHolder;
+//    @Autowired
+//    private TenantHolder tenantHolder;
 
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        setTenantId(request, tenantHolder);
+        setTenantId(request);
         return true;
     }
 
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception {
-        tenantHolder.clear();
+        TenantHolder.clear();
     }
 
-    private void setTenantId(HttpServletRequest request, TenantHolder tenantHolder) {
+    private void setTenantId(HttpServletRequest request) {
         // Header that would be attached to every request made to identify tenant DB.
         String tenantId = request.getHeader("x-tenant-id");
         //OR can look into request parameter that can help identify tenant DB
@@ -48,7 +48,7 @@ public class MultiTenantHandlerInterceptor extends HandlerInterceptorAdapter {
 //            Map map = new TreeMap<>((Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE));
 //            tenantId = (String) map.get("planetName");
 //        }
-        tenantHolder.setTenantId(tenantId);
+        TenantHolder.setTenantId(tenantId);
     }
 }
 

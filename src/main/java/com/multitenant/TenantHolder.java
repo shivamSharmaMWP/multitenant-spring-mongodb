@@ -2,19 +2,19 @@ package com.multitenant;
 
 import org.springframework.stereotype.Component;
 
-@Component
-public class TenantHolder {
-    private ThreadLocal<String> tenantId = new ThreadLocal<>();
 
-    public String getTenantId() {
+public class TenantHolder {
+    private static ThreadLocal<String> tenantId = new ThreadLocal<>();
+
+    public static String getTenantId() {
         return tenantId.get();
     }
 
-    public void setTenantId(final String tenantId) {
-        this.tenantId.set(tenantId);
+    public static void setTenantId(final String tenantId) {
+        TenantHolder.tenantId.set(tenantId);
     }
 
-    public void clear() {
+    public static void clear() {
         tenantId.remove();
     }
 }
